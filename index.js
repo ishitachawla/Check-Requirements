@@ -3,7 +3,7 @@ const github = require('@actions/github');
 const fs = require('fs');
 const filePath = core.getInput('path')
 const { request } = require('@octokit/request');
-//const request = require("request-promise");
+const { Octokit } = require("@octokit/core");
 fs.readdir('./', (err, files) => {
   console.log("entered");
   if (err)
@@ -117,12 +117,13 @@ fs.readdir('./', (err, files) => {
     var secret_token = core.getInput('GITHUB_TOKEN');
 //    const regex = /^(.*)github.com:(.*)\/(.*)\.git$/; 
     //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
+    const octokit = new Octokit({ auth: `personal-access-token123` });
     if(  secret_token === "")
     {console.log("blank value");}
       else
       {console.log("non blank" + secret_token);}
    
-      const result = await request('GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews',{
+      const result = await octokit.request('GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews',{
        owner: 'ishitachawla',
        repo: 'Requirement-testing',
        branch: 'main',
