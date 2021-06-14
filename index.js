@@ -126,7 +126,7 @@ fs.readdir('./', (err, files) => {
 //     owner: 'ishitachawla',
 //     repo: 'Requirement-testing',
 //     branch: 'main',
-       Authorization: 'Bearer ' + secret_token,
+       headers : { Authorization: 'Bearer ' + secret_token}
 //     mediaType: {
 //       previews: [
 //         'zzzax'
