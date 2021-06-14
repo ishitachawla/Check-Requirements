@@ -117,7 +117,9 @@ fs.readdir('./', (err, files) => {
     var secret_token = core.getInput('GITHUB_TOKEN');
 //    const regex = /^(.*)github.com:(.*)\/(.*)\.git$/; 
     //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
-    const octokit = new Octokit({ auth: secret_token });
+    const octokit = new Octokit({
+      auth: secret_token,
+    });
     if(  secret_token === "")
     {console.log("blank value");}
       else
