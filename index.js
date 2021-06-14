@@ -122,12 +122,12 @@ fs.readdir('./', (err, files) => {
       else
       {console.log("non blank" + secret_token);}
    
-      const result = await request('https://api.github.com/repos/ishitachawla/Requirement-testing/branches/main/protection/required_pull_request_reviews',{
-//     owner: 'ishitachawla',
-//     repo: 'Requirement-testing',
-//     branch: 'main',
-       headers : { Authorization: 'Bearer ' + secret_token,
-                   "Access-Control-Allow-Credentials": 'true',
+      const result = await request('GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews',{
+       owner: 'ishitachawla',
+       repo: 'Requirement-testing',
+       branch: 'main',
+       headers : { Authorization: 'Bearer ' + secret_token
+                   
        }
 //     mediaType: {
 //       previews: [
