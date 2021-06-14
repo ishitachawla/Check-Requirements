@@ -114,21 +114,25 @@ fs.readdir('./', (err, files) => {
     async function start(){ 
       console.log("entered start");
     try{
-    const SECRET_TOKEN = core.getInput('GITHUB_TOKEN');
+    var secret_token = core.getInput('GITHUB_TOKEN');
 //    const regex = /^(.*)github.com:(.*)\/(.*)\.git$/; 
     //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
-    console.log(SECRET_TOKEN);
-    const result = await request('https://api.github.com/repos/ishitachawla/Requirement-testing/branches/main/protection/required_pull_request_reviews',{
-    owner: 'ishitachawla',
-    repo: 'Requirement-testing',
-    branch: 'main',
-    Authorization: 'token ' + SECRET_TOKEN,
-    mediaType: {
-      previews: [
-        'zzzax'
-      ]
-    }
-  }); 
+    if(  secret_token === "")
+    {console.log("blank value");}
+      else
+      {console.log("non blank" + secret_token);}
+   
+      const result = await request('https://api.github.com/repos/ishitachawla/Requirement-testing/branches/main/protection/required_pull_request_reviews',{
+//     owner: 'ishitachawla',
+//     repo: 'Requirement-testing',
+//     branch: 'main',
+       Authorization: 'Bearer ' + secret_token,
+//     mediaType: {
+//       previews: [
+//         'zzzax'
+//       ]
+//     }
+    }); 
     console.log(result);
     console.log("yo");
     return result;
