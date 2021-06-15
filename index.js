@@ -47,20 +47,24 @@ fs.readdir('./', (err, files) => {
     })
 
       //dont have node modules in master for .ts
+    var flag=0;
     fs.readdir('./src',(err, filess ) => {
-      const isdotts = filess.includes('*.ts');
-      if(isdotts){
-        console.log("dot ts");
-        fs.readdir('./', (err, files) => {
-          const includesnm = files.includes('node_modules');
-          if(includesnm)
-            console.log("nm present error");
-          else
-            console.log("nm absent");
-        })
+      for(let i = 0; i < filess.length; i++){
+        if(getExtension(filess[i]) === "ts"){
+          flag=1;
+          console.log("dot ts");
+          fs.readdir('./', (err, files) => {
+            const includesnm = files.includes('node_modules');
+            if(includesnm)
+              console.log("nm present error");
+            else
+              console.log("nm absent");
+          })
+          break;
+        }
       }
-      else
-        console.log("not .ts");
+      if(flag===0)
+        console.log("not dot ts");
     })
 
     //check commit protection in branch
@@ -126,3 +130,7 @@ fs.readdir('./', (err, files) => {
       start();
     
     }})
+    function getExtension(filename) {
+      return filename.substring(filename.lastIndexOf('.')+1, filename.length)   // The function returns the product of p1 and p2
+    }
+    
