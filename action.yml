@@ -4,13 +4,17 @@ branding:
   icon: 'file-text'
   color: 'blue'
 inputs:
-  allow_failure:
-    description: 'Makes the Action fail on missing files.'
-    default: false
-    required: false
-  repository:
+  repo_name:
     description: "Your GitHub repository"
-    default: "ishitachawla/Check-Requirements"
+    default: "Check-Requirements"
+    required: true
+  repo_owner:
+    description: "owner"
+    default: "ishitachawla"
+    required: true
+  repo_branch:
+    description: "Branch"
+    default: "master"
     required: true
   GITHUB_TOKEN:
     description: 'Github Personal Access Token'
