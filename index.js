@@ -52,13 +52,13 @@ fs.readdir('./', (err, files) => {
       for(let i = 0; i < filess.length; i++){
         if(getExtension(filess[i]) === "ts"){
           flag=1;
-          console.log("dot ts");
+  //        console.log("dot ts");
           fs.readdir('./', (err, files) => {
             const includesnm = files.includes('node_modules');
             if(includesnm)
-              console.log("nm present error");
+              console.log("node_modules present in master");
             else
-              console.log("nm absent");
+              console.log("node_modules not present in master");
           })
           break;
         }
