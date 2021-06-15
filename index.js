@@ -64,93 +64,63 @@ fs.readdir('./', (err, files) => {
     })
 
     //check commit protection in branch
-  //  const octokit = new Octokit({ auth: githubToken });
 
-  //   async function run(){
-  //   try{
-  //   const SECRET_TOKEN = core.getInput('GITHUB_TOKEN');
-  //   console.log(SECRET_TOKEN);
-  //   const protectionOptions = {
-  //     url: 'https://api.github.com/repos/ishitachawla/Requirement-testing/branches/main/protection/required_signatures',
-  //     headers: {
-  //       Accept: "application/vnd.github.zzzax-preview+json",
-  //       Authorization: 'Bearer ' + SECRET_TOKEN,
-  //       'user-agent': 'node.js',
-  //       mediaType: {
-  //         previews: [
-  //           'zzzax'
-  //         ]
-  //       }
-  //     },
-  //   };
-  //   let protection = await request.get(protectionOptions);
-  //   let result = JSON.parse(protection);
-  //   console.log(result);
-  //   console.log("sip");
-  // }
-  // catch(error){console.log(error);}
-  // }
-  // run();
-  //   async function start() {
-  //     console.log("check commit entered");
-  //     const promise = new Promise((resolve, reject) => {
-  //     request('GET /repos/{owner}/{repo}/branches/{branch}/protection/required_signatures', {
-  //     owner: 'ishitachawla',
-  //     repo: 'Requirement-testing',
-  //     branch: 'main',
-  //     mediaType: {
-  //       previews: [
-  //         'zzzax'
-  //       ]
-  //     }
-  //   })
-    
-  //   .catch(reject);
-  //   console.log(promise);
-  // })
-
-  // start();
-  
-    async function start(){ 
-      console.log("entered start");
-    try{
-    var secret_token = core.getInput('GITHUB_TOKEN');
-//    const regex = /^(.*)github.com:(.*)\/(.*)\.git$/; 
-    //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
-    const octokit = new Octokit({
+    async function start() {
+      console.log("check commit entered");
+      var secret_token = core.getInput('GITHUB_TOKEN');
+      const octokit = new Octokit({
       auth: secret_token,
-    });
-    if(  secret_token === "")
-    {console.log("blank value");}
-      else
-      {console.log("non blank" + secret_token);}
-   
-      const result = await octokit.request('GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews',{
-       owner: 'ishitachawla',
-       repo: 'Requirement-testing',
-       branch: 'main',
+       });
+      const promise = new Promise((resolve, reject) => {
+      octokit.request('GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews', {
+      owner: 'ishitachawla',
+      repo: 'Requirement-testing',
+      branch: 'main',
        headers : { Authorization: 'Bearer ' + secret_token
                    
-       }
-//     mediaType: {
-//       previews: [
-//         'zzzax'
-//       ]
-//     }
-    }); 
-    console.log(result);
-    console.log("yo");
-    return result;
-}
-    catch(err){
-      console.log(err);
-      return "error";
-}
+        }
 
-
-    //end check commit
+       })
     
-      }
-      start();
+    .catch(reject);
+    console.log(promise);
+  })
+    }
+  start();
+  
+//     async function start(){ 
+//       console.log("entered start");
+//     try{
+//     var secret_token = core.getInput('GITHUB_TOKEN');
+//     const octokit = new Octokit({
+//       auth: secret_token,
+//     });
+//     if(  secret_token === "")
+//     {console.log("blank value");}
+//       else
+//       {console.log("non blank" + secret_token);}
+   
+//       const result = await octokit.request('GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews',{
+//        owner: 'ishitachawla',
+//        repo: 'Requirement-testing',
+//        branch: 'main',
+//        headers : { Authorization: 'Bearer ' + secret_token
+                   
+//        }
+//     }); 
+//     console.log(result);
+//     console.log("yo");
+//     return result;
+// }
+//     catch(err){
+//       console.log(err);
+//       return "error";
+// }
+
+
+//     //end check commit
+    
+//       }
+//       start();
     
     }})
