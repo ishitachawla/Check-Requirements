@@ -1,6 +1,6 @@
-import core from '@actions/core';
-import github from '@actions/github';
-import fs from 'fs';
+import * as core from '@actions/core';
+import * as github from '@actions/github';
+import * as fs from 'fs';
 const filePath = core.getInput('path')
 import { request } from '@octokit/request';
 import { Octokit } from "@octokit/core";
@@ -68,40 +68,44 @@ fs.readdir('./', (err, files) => {
 
     //check pr protection in branch
   
-    async function start(){ 
-      console.log("entered start");
-    try{
-    var secret_token = core.getInput('GITHUB_TOKEN');
-    const octokit = new Octokit({
-      auth: secret_token,
-    });
-    if(  secret_token === "")
-    {console.log("blank value");}
-      else
-      {console.log("non blank" + secret_token);}
-   
-      const result = await octokit.request('GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews',{
-       owner: 'ishitachawla',
-       repo: 'Requirement-testing',
-       branch: 'main',
-       headers : { Authorization: 'Bearer ' + secret_token
-                   
-       }
-    }); 
-    console.log(result);
-    console.log("yo");
-    return result;
-}
-    catch(err){
-      console.log(err);
-      return "error";
-}
-    
-      }
+
       start();
     
     }})
+
     function getExtension(filename: string) {
       return filename.substring(filename.lastIndexOf('.')+1, filename.length)   
     }
+
+
+    async function start(){ 
+        console.log("entered start");
+      try{
+      var secret_token = core.getInput('GITHUB_TOKEN');
+      const octokit = new Octokit({
+        auth: secret_token,
+      });
+      if(  secret_token === "")
+      {console.log("blank value");}
+        else
+        {console.log("non blank" + secret_token);}
+     
+        const result = await octokit.request('GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews',{
+         owner: 'ishitachawla',
+         repo: 'Requirement-testing',
+         branch: 'main',
+         headers : { Authorization: 'Bearer ' + secret_token
+                     
+         }
+      }); 
+      console.log(result);
+      console.log("yo");
+      return result;
+  }
+      catch(err){
+        console.log(err);
+        return "error";
+  }
+      
+        }
     
