@@ -99,7 +99,7 @@ fs.readdir('./', (err, files) => {
                      
          }
       }); 
-      console.log(result);
+      console.log(result.status);
       console.log("yo");
       return result;
   }
