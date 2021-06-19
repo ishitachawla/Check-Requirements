@@ -27,8 +27,9 @@ fs.readdir('./', (err, files) => {
       if(data.includes('Contribution'))
         console.log("found contribution");
                  
-      else
-        console.log("Contribution not found");
+      else{
+        core.setFailed("Contribution not found");
+      }
       });
 
 
