@@ -99,7 +99,9 @@ fs.readdir('./', (err, files) => {
                      
          }
       }); 
-      console.log(result);
+      if(result.data.dismiss_stale_reviews===false){
+          core.setFailed("Pls enable dsr");
+      }
       console.log("yo");
       return result;
   }
