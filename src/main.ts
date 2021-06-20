@@ -91,16 +91,19 @@ fs.readdir('./', (err, files) => {
         else
         {console.log("non blank" + secret_token);}
      
-        const result = await octokit.request('GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews',{
+        const result = await octokit.request('GET /repos/{owner}/{repo}/branches',{
          owner: 'ishitachawla',
          repo: 'Requirement-testing',
-         branch: 'main',
+        // branch: 'main',
          headers : { Authorization: 'Bearer ' + secret_token
                      
          }
-      }); 
-      if(result.data.dismiss_stale_reviews===false){
-          core.setFailed("Pls enable dsr");
+      });
+      for(let i=0;i<result.data.length;i++){
+        console.log(result.data[i].name)
+        if(result.data[i].name.substring(0,9)==='releases/'){
+          console.log('rel present')
+        }
       }
       console.log("yo");
       return result;
