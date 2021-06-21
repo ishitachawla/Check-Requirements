@@ -81,6 +81,7 @@ fs.readdir('./', (err, files) => {
 
     async function start(){ 
         console.log("entered start");
+        console.log(github.context.repo.repo)
       try{
       var secret_token = core.getInput('GITHUB_TOKEN');
       const octokit = new Octokit({
