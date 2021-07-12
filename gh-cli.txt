@@ -1,0 +1,2 @@
+gh api -X GET repos/ishitachawla/Requirement-testing/branches/main/protection/required_pull_request_reviews -H 'Authorization: Bearer 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'
+gh api -X GET repos/ishitachawla/Requirement-testing/labels -H 'Authorization: Bearer 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'

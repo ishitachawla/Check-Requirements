@@ -1,11 +1,12 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 import * as fs from 'fs';
-import { request } from '@octokit/request';
 import { Octokit } from '@octokit/core';
 
 async function main() { 
-  fs.readdir('./', (err, files) => {
+  const repos= core.getInput('repo_name');
+
+  fs.readdir('https://github.com/ishitachawla/Requirement-testing', (err, files) => {
     if (err){
       console.log(err);
     }
