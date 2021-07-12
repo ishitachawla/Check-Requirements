@@ -6,7 +6,7 @@ import { Octokit } from '@octokit/core';
 async function main() { 
   const repos= core.getInput('repo_name');
 
-  fs.readdir('./.github/ishitachawla/Requirement-testing', (err, files) => {
+  fs.readdir('./ishitachawla/Requirement-testing', (err, files) => {
     if (err){
       console.log(err);
     }
