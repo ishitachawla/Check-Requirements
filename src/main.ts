@@ -6,7 +6,7 @@ import { Octokit } from '@octokit/core';
 async function main() { 
   const repos= core.getInput('repo_name');
 
-  fs.readdir('./ishitachawla/Requirement-testing', (err, files) => {
+  fs.readdir('/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/runner/.local/bin:/opt/pipx_bin:/usr/share/rust/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/snap/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', (err, files) => {
     if (err){
       console.log(err);
     }
