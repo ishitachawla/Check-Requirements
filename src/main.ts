@@ -6,7 +6,7 @@ import { Octokit } from '@octokit/core';
 async function main() { 
   const repos= core.getInput('repo_name');
 
-  fs.readdir('/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/runner/.local/bin:/opt/pipx_bin:/usr/share/rust/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/snap/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', (err, files) => {
+  fs.readdir('./', (err, files) => {
     if (err){
       console.log(err);
     }
@@ -18,7 +18,7 @@ async function main() {
       const repository = github.context.repo.repo;
       const ownername = github.context.repo.owner;
       //Check for example and Contribution in README
-      readmeChecks(files);
+      readmeChecks(repository, ownername, secret_token, octokit);
       //Check for CODEOWNERS file in .github folder
       codeOwnerCheck();
       //Check if nodemodules folder is present in master branch for typescript action
@@ -37,30 +37,23 @@ async function main() {
   })
 }
 
-function readmeChecks(files: string[]){
-  const includesReadme = files.includes('README.md');
-  if(includesReadme){
+async function readmeChecks(repository: string, ownername: string, secret_token: string, octokit: Octokit){
+  try{
     console.log('README file is present');
-    fs.readFile('./README.md', function (err, data) {
-    //check example
-    if(data.includes('Example')){
-      console.log('Example workflow is present in README');
+    const current = await octokit.request('GET /repos/{owner}/{repo}/contents/README.md',{
+      repo: repository,
+      owner: ownername,
+      headers : { Authorization: 'Bearer ' + secret_token
+      }
+    }); 
+    let contents = Buffer.from(current.data.content, "base64").toString("utf8");
+    if(contents.includes('Example')){
+      console.log('Example workflow is present')
     }
-    else{
-      core.setFailed('Please add Example workflow in README');
-    }            
-      //check contribution
-    if(data.includes('Contribution')){
-      console.log('Contribution is present in README');
-    }             
-    else{
-      core.setFailed('Please add Contribution in README');
-    }
-    });
-  }
-  else{
-    core.setFailed('Please add README file');
-  }
+}
+catch(err){
+
+}
 }
 
 function codeOwnerCheck(){
