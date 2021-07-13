@@ -55,7 +55,7 @@ catch(err){
 }
 
 function codeOwnerCheck(){
-  var files= fs.readdirSync('https://github.com/ishitachawla/Requirement-testing/.github'); 
+  var files= fs.readdirSync('https://github.com/ishitachawla/Requirement-testing/tree/main/.github'); 
     const includesCodeOwners = files.includes('CODEOWNERS');
     if(includesCodeOwners){
       console.log('CODEOWNERS file is present');
