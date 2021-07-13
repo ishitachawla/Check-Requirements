@@ -4,8 +4,6 @@ import * as fs from 'fs';
 import { Octokit } from '@octokit/core';
 
 async function main() { 
-  const repos= core.getInput('repo_name');
-
   fs.readdir('./', (err, files) => {
     if (err){
       console.log(err);
@@ -57,7 +55,7 @@ catch(err){
 }
 
 function codeOwnerCheck(){
-  fs.readdir('./.github', (err, files) => {
+  var files= fs.readdirSync('https://github.com/ishitachawla/Requirement-testing/.github'); 
     const includesCodeOwners = files.includes('CODEOWNERS');
     if(includesCodeOwners){
       console.log('CODEOWNERS file is present');
@@ -65,7 +63,7 @@ function codeOwnerCheck(){
     else{
       core.setFailed('Please add CODEOWNERS file');
     }
-  })
+  
 }
 
 function getExtension(filename: string) {
