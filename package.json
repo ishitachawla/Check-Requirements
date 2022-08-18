@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/ishitachawla/Check-Requirements#readme",
   "dependencies": {
-    "@actions/core": "^1.4.0",
+    "@actions/core": "^1.9.1",
     "@actions/github": "^5.0.0",
     "awesome-typescript-loader": "^5.2.1",
     "request": "^2.88.2",
